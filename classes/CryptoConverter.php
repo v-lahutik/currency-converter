@@ -6,19 +6,25 @@ class Converter{
 
 class CryptoConverter{
     //properties
-    public $currencyCode;
+   // public string $currencyCode;
 
-   function __construct(string $currencyCode){
-    $this->currencyCode= $currencyCode;
+   function __construct(public string $currencyCode){
+   // $this->currencyCode= $currencyCode;
 
    }
 
     //methods
-    public function convert(float $value) {
+    public function convert(float $value=1): float {
         $code= $this->currencyCode;
-        $api= "https://cex.io/api/ticker/$crypto/USD";
-        $json = file_get_contents($url);
-        echo $json;
-
+        $url= "https://cex.io/api/ticker/$code/USD";
+        $json = file_get_contents($url); 
+         if ($json){
+             $data = json_decode($json);
+             $last = $data->last;
+             return $value * $last;
+         }else{
+             return false;
+         }
     }
+
 }

@@ -1,5 +1,5 @@
 <?php
-require_once "./classes.php"
+require_once "./classes.php";
 ?>
 
 <!DOCTYPE html>
@@ -13,23 +13,22 @@ require_once "./classes.php"
     <h1>Conversion Results</h1>
     <?php
 
-if(isset($_POST["amount"]) && isset($_POST[$crypto])){
+if(isset($_POST["amount"]) && isset($_POST["crypto"])){
 
-//Superglobal variables
-$amount=$_GET["amount"];
-$crypto=$_GET["crypto"];
+//Superglobals variables
+$amount=$_POST["amount"];
+$crypto=$_POST["crypto"];
 
 
-$converter = new Converter($crypto);
+$converter = new CryptoConverter($crypto);
 $result = $converter->convert($amount);
 
 echo "<p>You want to convert $amount $crypto. </p> ";
-echo "<p>You have USD $result </p> ";
+echo "<h3>You have USD $result </h3> ";
 }
 else{
     echo "<h2> Oops! Something went wrong, try again. </h2>";
 }
-
     ?>
 
 </body>
